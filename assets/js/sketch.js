@@ -1,13 +1,5 @@
 let img, myFont;
 let fontssss = ['fontText', 'fontText1'];
-
-// let fontIndex = 1;
-// let xaxis = 20;
-// let yaxis = 20;
-// let fontsize = 0.4;
-// let w = 700;
-// let linespacing = 70;
-
 let fontText = [];
 
 tmpOffsetMap = [
@@ -63,7 +55,7 @@ function loadJSON() {}
 
 function preload() {
 	changeFont();
-	loadPage();
+	img = loadImage('assets/images/pg1lines.jpg');
 	loop();
 }
 
@@ -75,20 +67,16 @@ function setup() {
 }
 
 function draw() {
+	clear();
 	noLoop();
-	//background(255);
 	image(img, 0, 0, width, height);
-	// textSize(settings.fontsize);
-	// fill('#264180');
-	// fill('#000000');
 	if (settings.linespacing) textLeading(settings.linespacing);
 	pos = createVector(settings.xaxis, settings.yaxis);
 
-	// text(data, xaxis, yaxis, w, 900);
-
 	for (var i = 0; i <= textData.length; i++) {
-		if (pos.x >= settings.xaxis + settings.w || textData[i] == '\n') {
-			pos.x = settings.xaxis;
+		if (pos.x >= settings.xaxis + settings.w || textData[i] === '\n') {
+			pos.x = settings.xaxis + Math.round(getrand(-4, 4));
+
 			pos.y += settings.linespacing * settings.fontsize;
 		}
 
@@ -96,8 +84,8 @@ function draw() {
 		let y_scale = 1;
 		let y_shift_flag = 0;
 		let randScale = getrand(0.9, 1);
+
 		if ('textImage' + textData[i] in fontText) {
-			// console.log(fontText);
 			if (settings.fontIndex < 2 && !isNaN(textData[i])) {
 				y_shift_flag = 1;
 				y_scale = 2;
@@ -112,6 +100,7 @@ function draw() {
 			if (textData[i].charCodeAt(0) == 46) {
 				pos.x += 1;
 			}
+
 			if (textData[i]) {
 				tint(128, 128, 128);
 
@@ -148,11 +137,6 @@ function changeFont(custom_change = undefined) {
 			);
 		} catch (error) {}
 	});
-	loop();
-}
-
-function loadPage() {
-	img = loadImage('assets/images/pg1lines.jpg');
 	loop();
 }
 
