@@ -12,13 +12,13 @@ let linespacing = 89;
 let fontText = [];
 
 tmpOffsetMap = [
-	6,
+	8,
 	-2,
-	-1.11111111,
-	-0.22222222,
-	0.66666667,
-	1.55555556,
-	2.44444444,
+	4.55555556,
+	5.55555556,
+	3.55555556,
+	3.55555556,
+	3.44444444,
 	3.33333333,
 	4.22222222,
 	5.11111111,
@@ -63,7 +63,7 @@ function draw() {
 		if (pos.x >= xaxis + w || textData[i] === '\n') {
 			pos.x = xaxis + Math.round(getrand(-4, 4));
 
-			pos.y += linespacing * fontsize;
+			pos.y += linespacing * fontsize + Math.round(getrand(-1, 1));
 		}
 
 		let y_offset = 0;
@@ -75,7 +75,7 @@ function draw() {
 			if (fontIndex < 2 && !isNaN(textData[i])) {
 				y_shift_flag = 1;
 				y_scale = 2;
-				y_offset =  tmpOffsetMap[Number(textData[i])];
+				y_offset = tmpOffsetMap[Number(textData[i])];
 			}
 			if (
 				textData[i].charCodeAt(0) > 96 &&
@@ -127,3 +127,4 @@ function changeFont() {
 	});
 	loop();
 }
+
