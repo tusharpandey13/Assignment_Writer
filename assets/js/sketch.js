@@ -12,16 +12,16 @@ let linespacing = 89;
 let fontText = [];
 
 tmpOffsetMap = [
-	8,
-	-2,
+	9,
+	0,
 	4.55555556,
 	5.55555556,
 	3.55555556,
 	3.55555556,
-	3.44444444,
-	3.33333333,
-	4.22222222,
-	5.11111111,
+	6,
+	6,
+	6,
+	6,
 ];
 
 // elements of list(range(32, 126)) minus the element '96'
