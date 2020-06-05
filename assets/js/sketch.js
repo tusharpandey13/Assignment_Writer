@@ -75,7 +75,7 @@ function draw() {
 			if (fontIndex < 2 && !isNaN(textData[i])) {
 				y_shift_flag = 1;
 				y_scale = 2;
-				// y_offset = y_scale * tmpOffsetMap[Number(textData[i])];
+				y_offset =  tmpOffsetMap[Number(textData[i])];
 			}
 			if (
 				textData[i].charCodeAt(0) > 96 &&
