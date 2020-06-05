@@ -25,7 +25,7 @@ tmpOffsetMap = [
 ];
 
 // elements of list(range(32, 126)) minus the element '96'
-let dataAvailable = Array.from(new Array(93), (x, i) => i + 32);
+let dataAvailable = Array.from(new Array(94), (x, i) => i + 32);
 dataAvailable.splice(64, 1); // remove item '96'
 
 // this function has binding in index.html
