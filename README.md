@@ -1,11 +1,12 @@
 ## branch : dev_bare
-the bare minimum functionality, made on top of the dev_tushar branch
-has improved support for the 2nd font, randomized character alignment, per character improvements
-ONLY USE IF YOU WANT PERFECTION BUT NOT VERSATILITY
+the bare minimum functionality, made on top of the dev_tushar branch  
+has improved support for the 2nd font, randomized character alignment, per character improvements  
+ONLY USE IF YOU WANT PERFECTION BUT NOT VERSATILITY  
 ***
 
 ## branch : dev_tushar
-my upstream fork of the original Assignment_Writer repo. contains performance improvements and code refactors.
+my upstream fork of the original Assignment_Writer repo.  
+contains performance improvements and code refactors.  
 ***
 
 # Assignment_Writer
