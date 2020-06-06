@@ -1,3 +1,5 @@
+// generally horizontal limit of col 50
+
 let textData = `Demo`;
 let img, myFont;
 let fontssss = ['fontText', 'fontText1'];
@@ -5,28 +7,37 @@ let fontssss = ['fontText', 'fontText1'];
 let fontIndex = 1;
 let fontsize = 0.3;
 let xaxis = 104;
-let yaxis = 81;
+let yaxis = 5;
 let w = 619;
 let linespacing = 89;
 
 let fontText = [];
 
-tmpOffsetMap = [
-	9,
-	0,
-	4.55555556,
-	5.55555556,
-	3.55555556,
-	3.55555556,
-	6,
-	6,
-	8,
-	6,
-];
+// y_offset, y_shift_flag, y_scale, x_inc_mul_post, x_inc_mul_pre
+tmpOffsetMap = {
+	'/': [4, 0, 1, 1, 0],
+	0: [10, 1, 2, 1.2, 2],
+	1: [4, 1, 2, 1.2, 2],
+	2: [4, 1, 2, 1.2, 2],
+	3: [8, 1, 2, 1.2, 2],
+	4: [7, 1, 2, 1.2, 2],
+	5: [7, 1, 2, 1.2, 2],
+	6: [9, 1, 2, 1.2, 2],
+	7: [6, 1, 2, 1.2, 2],
+	8: [8, 1, 2, 1.2, 2],
+	9: [6, 1, 2, 1.2, 2],
+	',': [4, 0, 1, 1.7, 4],
+	';': [0, 0, 1, 3, 3],
+	':': [0, 0, 1, 3, 4],
+	'[': [0, 0, 1, 1, 1],
+	'}': [0, 0, 1, 2, 3],
+	'{': [0, 0, 1, 1, 1],
+	'-': [6, 0, 1, 1.5, 1.5],
+};
 
 // elements of list(range(32, 126)) minus the element '96'
-let dataAvailable = Array.from(new Array(94), (x, i) => i + 32);
-dataAvailable.splice(64, 1); // remove item '96'
+let dataAvailable = Array.from(new Array(93), (x, i) => i + 33);
+dataAvailable.splice(63, 1); // remove item '96'
 
 // this function has binding in index.html
 function incrementor() {
@@ -59,54 +70,86 @@ function draw() {
 	if (linespacing) textLeading(linespacing);
 	pos = createVector(xaxis, yaxis);
 
-	for (var i = 0; i <= textData.length; i++) {
-		if (pos.x >= xaxis + w || textData[i] === '\n') {
-			pos.x = xaxis + Math.round(getrand(-4, 4));
+	let headerflag = 1;
 
-			pos.y += linespacing * fontsize + Math.round(getrand(-1, 1));
-		}
+	for (var i = 0; i < textData.length; i++) {
+		if (textData[i]) {
+			let y_offset = 0;
+			let y_scale = 1;
+			let x_scale = 1;
+			let x_inc_mul_post = 1;
+			let x_inc_mul_pre = 0;
+			let y_shift_flag = 0;
+			let randScale = getrand(0.9, 1);
 
-		let y_offset = 0;
-		let y_scale = 1;
-		let y_shift_flag = 0;
-		let randScale = getrand(0.9, 1);
-
-		if ('textImage' + textData[i] in fontText) {
-			if (fontIndex < 2 && !isNaN(textData[i])) {
-				y_shift_flag = 1;
-				y_scale = 2;
-				y_offset = tmpOffsetMap[Number(textData[i])];
-			}
-			if (
-				textData[i].charCodeAt(0) > 96 &&
-				textData[i].charCodeAt(0) < 123
-			) {
-				y_offset = 6;
-			}
-			if (textData[i].charCodeAt(0) == 46) {
-				pos.x += 1;
+			if (pos.x >= xaxis + w || textData[i] === '\n') {
+				pos.x = xaxis + Math.round(getrand(-4, 4));
+				pos.y += linespacing * fontsize + Math.round(getrand(-1, 1));
 			}
 
-			if (textData[i]) {
-				tint(128, 128, 128);
+			if (pos.y > 45 && headerflag) {
+				pos.y = 81;
+				headerflag = 0;
+			}
 
-				image(
-					fontText['textImage' + textData[i]],
-					pos.x,
-					pos.y + -20 * y_shift_flag + y_offset,
+			console.log(textData[i]);
+			if (textData[i].charCodeAt(0) === 32) {
+				pos.x += Math.round(getrand(8, 12));
+			}
+
+			if ('textImage' + textData[i] in fontText) {
+				// console.log(pos.y);
+				if (fontIndex < 2 && textData[i] in tmpOffsetMap) {
+					y_offset = tmpOffsetMap[textData[i]][0];
+					y_shift_flag = tmpOffsetMap[textData[i]][1];
+					y_scale = tmpOffsetMap[textData[i]][2];
+					x_inc_mul_post = tmpOffsetMap[textData[i]][3];
+					pos.x += tmpOffsetMap[textData[i]][4];
+				}
+				if (
+					textData[i].charCodeAt(0) > 96 &&
+					textData[i].charCodeAt(0) < 123
+				) {
+					y_offset = 6;
+				}
+				if (
+					textData[i].charCodeAt(0) > 64 &&
+					textData[i].charCodeAt(0) < 91
+				) {
+					x_inc_mul_post = 0.8;
+					y_offset = 8;
+					y_scale = 0.7;
+					x_scale = 0.7;
+				}
+				if (textData[i].charCodeAt(0) == 46) {
+					pos.x += 1;
+				}
+				if (textData[i] && !(textData[i].charCodeAt(0) == 32)) {
+					tint(128, 128, 128);
+
+					image(
+						fontText['textImage' + textData[i]],
+						pos.x,
+						pos.y + -20 * y_shift_flag + y_offset,
+						fontText['textImage' + textData[i]].width *
+							fontsize *
+							x_scale *
+							randScale,
+						fontText['textImage' + textData[i]].height *
+							fontsize *
+							y_scale *
+							randScale
+					);
+					noTint();
+				}
+				pos.x +=
 					fontText['textImage' + textData[i]].width *
 						fontsize *
-						randScale,
-					fontText['textImage' + textData[i]].height *
-						fontsize *
-						y_scale *
-						randScale
-				);
-				noTint();
-			}
-			pos.x += fontText['textImage' + textData[i]].width * fontsize;
-			if (textData[i].charCodeAt(0) == 46) {
-				pos.x += 2;
+						x_inc_mul_post +
+					Math.round(getrand(0, 1)) * Math.floor(x_inc_mul_post);
+				if (textData[i].charCodeAt(0) == 46) {
+					pos.x += 2;
+				}
 			}
 		}
 	}
@@ -119,12 +162,14 @@ function getrand(min, max) {
 function changeFont() {
 	dataAvailable.forEach((i) => {
 		try {
-			// console.log(str(fontssss[fontIndex]) + '/' + str(i) + '_t.png');
 			fontText['textImage' + String.fromCharCode(i)] = loadImage(
-				str(fontssss[fontIndex]) + '/' + str(i) + '_t.png'
+				'assets/fonts/' +
+					str(fontssss[fontIndex]) +
+					'/' +
+					str(i) +
+					'_t.png'
 			);
 		} catch (error) {}
 	});
 	loop();
 }
-
