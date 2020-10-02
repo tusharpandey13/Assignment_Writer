@@ -49,8 +49,10 @@ function incrementor() {
 }
 
 function textChanged(text) {
-  textData = text;
-  loop();
+  if (text !== textData) {
+    textData = text;
+    loop();
+  }
 }
 
 function preload() {
