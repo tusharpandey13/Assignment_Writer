@@ -1,17 +1,78 @@
-#dataField {
-	height: 300px;
-}
-
-.hidden {
-	display: none;
-}
-
 canvas {
-	width: 100% !important;
-	height: auto !important;
+  height: 100vh !important;
+  width: 75vh !important;
+}
+.hidden {
+  display: none;
+}
+html,
+body {
+  margin: 0;
+  height: 100vh;
+  background: white;
 }
 
-.inline-btn {
-	margin-right: 10px !important;
-	margin-left: 10px !important;
+main {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: stretch;
+  height: 100%;
+  background-color: #1b1c1c;
+}
+
+.s1 {
+  /* margin: 10px; */
+  /* width: 100%; */
+  padding: 1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+.s2 {
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: stretch;
+  width: 100%;
+}
+
+.bC {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  margin: 0 1rem 0 0;
+}
+button {
+  margin: 1rem;
+}
+form {
+  height: 100%;
+  margin: 0;
+}
+textarea {
+  height: calc(100% - 0rem);
+  resize: none;
+  background-color: #333333;
+  color: white;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 300;
+  padding: 1rem 3rem 1rem 3rem;
+}
+textarea:focus {
+  outline: none !important;
+  border: 1px solid #2196f3;
+  box-shadow: 0 0 10px #2195f334;
 }

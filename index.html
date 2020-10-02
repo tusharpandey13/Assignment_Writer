@@ -1,66 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="author" content="saiteja69" />
-		<meta
-			name="description"
-			content="Convet Digital to Handwritten Scanned Page. Want to Save time on writing assginment on Paper use Our Super Fast Tool."
-		/>
-		<title>Convert Digital to Handwritten Scanned Page.</title>
-		<link rel="icon" href="assets/images/logo.png" />
-		<link rel="stylesheet" href="assets/css/normalize.css" />
-		<link rel="stylesheet" href="assets/css/milligram.css" />
 
-		<link rel="stylesheet" href="assets/css/custom.css" />
-	</head>
-	<body>
-		<main class="">
-			<div class="row" style="max-width: 99vw;">
-				<div class="column">
-					<section class="container" id="examples">
-						<h3 class="title">Enter Text</h3>
-						<form onsubmit="return false">
-							<fieldset>
-								<textarea
-									placeholder="Enter Text You want to be written a paper...."
-									id="dataField"
-									onkeyup="textChanged(this.value)"
-								></textarea>
-							</fieldset>
-							<input
-								class="button-primary button-large download-image hidden"
-								type="file"
-								id="pageUploader"
-								onclick=""
-							/>
-							<div class="row">
-								<button
-									class="column button-primary button-large inline-btn"
-									id="btnFileUpload"
-								>
-									Upload Custom Background
-								</button>
-								<!-- <button
-									class="column button-primary button-large inline-btn"
-									onclick="incrementor()"
-								>
-									fontIndex Handwriting Style
-								</button>
-								-->
-							</div>
-						</form>
-					</section>
-				</div>
-				<div class="column">
-					<div id="contributing"></div>
-				</div>
+<head>
+	<meta charset="utf-8" />
+	<title>Convert Digital to Handwritten Scanned Page.</title>
+	<link rel="icon" href="assets/images/logo.png" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		crossorigin="anonymous">
+
+
+	<link rel="stylesheet" href="assets/css/custom.css" />
+</head>
+
+<body>
+
+	<main>
+		<section class="s1">
+			<textarea placeholder="Enter Text You want to be written a paper...." id="dataField"
+				oninput="textChanged(this.value)" cols="48" wrap="hard"></textarea>
+		</section>
+		<section class="s2">
+			<div class="bC">
+				<input class="button-primary button-large download-image hidden" type="file" id="pageUploader" onclick="" />
+				<button type="button" class="btn btn-dark" id="btnFileUpload">
+					Upload Custom Background
+					<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cloud-arrow-up-fill" fill="currentColor"
+						xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd"
+							d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 5.146l-2-2a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L7.5 6.707V10.5a.5.5 0 0 0 1 0V6.707l1.146 1.147a.5.5 0 0 0 .708-.708z">
+						</path>
+					</svg>
+				</button>
+
+				<button type="button" class="btn btn-success" onclick="changeimg()">
+					Change Background
+					<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-shuffle" fill="currentColor"
+						xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd"
+							d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z">
+						</path>
+						<path
+							d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z">
+						</path>
+					</svg>
+				</button>
+
+				<button type="button" class="btn btn-primary" onclick="save()">
+					Download
+					<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cloud-arrow-down-fill" fill="currentColor"
+						xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd"
+							d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 6.854l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5a.5.5 0 0 1 1 0v3.793l1.146-1.147a.5.5 0 0 1 .708.708z">
+						</path>
+					</svg>
+				</button>
+
 			</div>
-		</main>
+			<div id="CC"></div>
+		</section>
+	</main>
 
-		<script src="assets/js/p5.min.js"></script>
-		<script src="assets/js/script.js"></script>
-		<script src="assets/js/sketch.js"></script>
-	</body>
+	<script src="assets/js/p5.min.js"></script>
+	<script src="assets/js/script.js"></script>
+	<script src="assets/js/sketch.js"></script>
+
+	<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script> -->
+</body>
+
 </html>
