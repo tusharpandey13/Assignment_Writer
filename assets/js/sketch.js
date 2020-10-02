@@ -140,7 +140,7 @@ function draw() {
           const iw = fontText[textData[i]].width * fontsize * x_scale;
           const ih = fontText[textData[i]].height * fontsize * y_scale;
 
-          if (pos.x + iw + 5 >= xaxis + w) hyphenflag = 1;
+          if (!'. \n'.includes(textData[i]) && pos.x + iw + 5 >= xaxis + w) hyphenflag = 1;
 
           image(
             hyphenflag ? fontText['-'] : fontText[textData[i]],
