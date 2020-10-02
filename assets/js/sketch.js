@@ -5,7 +5,7 @@ let textData = `Demo`;
 let img = [undefined, undefined];
 let myFont;
 let imgindex = 0;
-let fontssss = ['fontText', 'fontText1'];
+let fonts = ['fontText', 'fontText1'];
 
 let fontIndex = 1;
 let fontsize = 0.3;
@@ -39,13 +39,21 @@ tmpOffsetMap = {
   '(': [22, 1, 1, 1, 1],
 };
 
+function mutate(s) {
+  return function splice() {
+    var a = s.split('');
+    Array.prototype.splice.apply(a, arguments);
+    return a.join('');
+  };
+}
+
 // elements of list(range(32, 126)) minus the element '96'
 let dataAvailable = Array.from(new Array(93), (x, i) => i + 33);
 dataAvailable.splice(63, 1); // remove item '96'
 
 // this function has binding in index.html
 function incrementor() {
-  fontIndex = (fontIndex + 1) % fontssss.length;
+  fontIndex = (fontIndex + 1) % fonts.length;
   // console.log(fontIndex);
   changeFont();
 }
@@ -77,6 +85,7 @@ function draw() {
   if (linespacing) textLeading(linespacing);
   let pos = createVector(xaxis, yaxis);
   let headerflag = 1;
+
   // const i = textData.length - 1;
   for (var i = 0; i < textData.length; i++) {
     if (textData[i]) {
@@ -87,8 +96,9 @@ function draw() {
       let x_inc_mul_pre = 0;
       let y_shift_flag = 0;
       let randScale = getrand(0.9, 1);
+      let hyphenflag = 0;
 
-      if (pos.x >= xaxis + w || textData[i] === '\n') {
+      if (textData[i] === '\n') {
         pos.x = xaxis + Math.round(getrand(-4, 4));
         pos.y += linespacing * fontsize + Math.round(getrand(-1, 1));
       }
@@ -103,7 +113,7 @@ function draw() {
         pos.x += Math.round(getrand(8, 12));
       }
 
-      if ('textImage' + textData[i] in fontText) {
+      if (textData[i] in fontText) {
         // console.log(pos.y);
         if (fontIndex < 2 && textData[i] in tmpOffsetMap) {
           y_offset = tmpOffsetMap[textData[i]][0];
@@ -127,21 +137,32 @@ function draw() {
         if (textData[i] && !(textData[i].charCodeAt(0) == 32)) {
           tint(128, 128, 128);
 
+          const iw = fontText[textData[i]].width * fontsize * x_scale;
+          const ih = fontText[textData[i]].height * fontsize * y_scale;
+
+          if (pos.x + iw + 5 >= xaxis + w) hyphenflag = 1;
+
           image(
-            fontText['textImage' + textData[i]],
+            hyphenflag ? fontText['-'] : fontText[textData[i]],
             pos.x,
             pos.y + -20 * y_shift_flag + y_offset,
-            fontText['textImage' + textData[i]].width * fontsize * x_scale * randScale,
-            fontText['textImage' + textData[i]].height * fontsize * y_scale * randScale
+            hyphenflag ? fontText['-'].width * fontsize * x_scale : iw * randScale,
+            ih * randScale
           );
           noTint();
         }
         pos.x +=
-          fontText['textImage' + textData[i]].width * fontsize * x_inc_mul_post +
+          fontText[textData[i]].width * fontsize * x_inc_mul_post +
           Math.round(getrand(0, 1)) * Math.floor(x_inc_mul_post);
         if (textData[i].charCodeAt(0) == 46) {
           pos.x += 2;
         }
+      }
+      if (hyphenflag) {
+        i--;
+        hyphenflag = 0;
+        pos.x = xaxis + Math.round(getrand(-4, 4)) + 40;
+        pos.y += linespacing * fontsize + Math.round(getrand(-1, 1));
       }
     }
   }
@@ -154,8 +175,8 @@ function getrand(min, max) {
 function changeFont() {
   dataAvailable.forEach(i => {
     try {
-      fontText['textImage' + String.fromCharCode(i)] = loadImage(
-        'assets/fonts/' + str(fontssss[fontIndex]) + '/' + str(i) + '_t.png'
+      fontText[String.fromCharCode(i)] = loadImage(
+        'assets/fonts/' + str(fonts[fontIndex]) + '/' + str(i) + '_t.png'
       );
     } catch (error) {}
   });
