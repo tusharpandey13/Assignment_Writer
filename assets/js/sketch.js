@@ -188,7 +188,8 @@ function save() {
 }
 
 function changeimg() {
-  imgindex = 1 - imgindex;
+  imgindex += 1;
+  if (imgindex === img.length) imgindex = 0;
   // img = await loadImage(`assets/images/pg${imgindex}.jpg`);
   console.log(imgindex, img);
   loop();
