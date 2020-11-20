@@ -14,11 +14,13 @@ let yaxis = 5;
 let w = 670;
 let linespacing = 89;
 let fontText = [];
+let letterOpacity = 210;
+
 
 // y_offset, y_shift_flag, y_scale, x_inc_mul_post, x_inc_mul_pre
 tmpOffsetMap = {
   '/': [4, 0, 1, 1, 0],
-  0: [10, 1, 2, 1.2, 2],
+  0: [11, 1, 2, 1.2, 2],
   1: [4, 1, 2, 1.2, 2],
   2: [1, 1, 2.4, 1.2, 2],
   3: [8, 1, 2, 1.2, 2],
@@ -31,12 +33,16 @@ tmpOffsetMap = {
   ',': [4, 0, 1, 1.7, 4],
   ';': [0, 0, 1, 3, 3],
   ':': [0, 0, 1, 3, 4],
-  '[': [0, 0, 1, 1, 1],
+  '[': [2, 0, 1, 1, 1],
+  ']': [4, 0, 1, 1, 1],
   '}': [0, 0, 1, 2, 3],
   '{': [0, 0, 1, 1, 1],
   '-': [6, 0, 1, 1.5, 1.5],
   ')': [22, 1, 1, 1, 1],
   '(': [22, 1, 1, 1, 1],
+  '$': [1, 0, 1, 1.5, 1],
+  '#': [1, 0, 1, 1.5, 1],
+  '=': [1, 0, 1, 1.5, 1.5],
 };
 
 function mutate(s) {
@@ -135,7 +141,7 @@ function draw() {
           pos.x += 1;
         }
         if (textData[i] && !(textData[i].charCodeAt(0) == 32)) {
-          tint(128, 128, 128);
+          tint(255, letterOpacity);
 
           const iw = fontText[textData[i]].width * fontsize * x_scale;
           const ih = fontText[textData[i]].height * fontsize * y_scale;
