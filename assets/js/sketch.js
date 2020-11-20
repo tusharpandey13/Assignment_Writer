@@ -74,7 +74,6 @@ function textChanged(text) {
 function preload() {
   changeFont();
   img[0] = loadImage(`assets/images/pg0.jpg`);
-  img[1] = loadImage(`assets/images/pg1.jpg`);
   loop();
 }
 
@@ -191,12 +190,4 @@ function changeFont() {
 
 function save() {
   saveCanvas();
-}
-
-function changeimg() {
-  imgindex += 1;
-  if (imgindex === img.length) imgindex = 0;
-  // img = await loadImage(`assets/images/pg${imgindex}.jpg`);
-  console.log(imgindex, img);
-  loop();
 }
